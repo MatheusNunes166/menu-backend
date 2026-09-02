@@ -1,47 +1,46 @@
-import { Repository } from "typeorm";
-import { Category } from "./category.entity";
-import { InjectRepository } from "@nestjs/typeorm";
-import { NotFoundException } from "@nestjs/common";
-import { CreateCategoryDTO } from "./dto/create-category";
-import { UpdateCategoryDto } from "./dto/update-category";
+import { Repository } from 'typeorm';
+import { Category } from './category.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { CreateCategoryDTO } from './dto/create-category';
+import { UpdateCategoryDTO } from './dto/update-category';
 
-@Injectable() 
+@Injectable()
 export class CategoryService {
-
-    constructor(
-        @InjectRepository{Category}
-        private readonly categoryRepository: Repository<Category>
-    ) {}
+  constructor(
+    @InjectRepository(Category)
+    private readonly categoryRepository: Repository<Category>,
+  ) {}
   findAll(): Promise<Category[]> {
     return this.categoryRepository.find({
-      order : { name: 'ASC'}
+      order: { name: 'ASC' },
     });
   }
 
   async findOne(id: string): Promise<Category> {
-    const category = await this.categoryRepository.findOneBy({id});
+    const category = await this.categoryRepository.findOneBy({ id });
     if (!category) {
       throw new NotFoundException('Categoria não encontrada!');
     }
     return category;
   }
 
-  create(dto:CreateCategoryDTO ): Promise<Category> {
+  create(dto: CreateCategoryDTO): Promise<Category> {
     const category = this.categoryRepository.create({
       ...dto,
       name: dto.name,
-      active: true
+      active: true,
     });
     return this.categoryRepository.save(category);
   }
 
- async update(id: string,dto: UpdateCategoryDto): Promise<Category> {
+  async update(id: string, dto: UpdateCategoryDTO): Promise<Category> {
     const category = await this.findOne(id);
 
-    if(dto.name !== undefined){
+    if (dto.name !== undefined) {
       category.name = dto.name;
     }
-    if(dto.active !== undefined){
+    if (dto.active !== undefined) {
       category.active = dto.active;
     }
     return this.categoryRepository.save(category);
