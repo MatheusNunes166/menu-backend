@@ -8,5 +8,6 @@ import { SpotService } from './spot.service';
   imports: [TypeOrmModule.forFeature([Spot])],
   controllers: [SpotController],
   providers: [SpotService],
+  exports: [SpotService],
 })
 export class SpotModule {}
