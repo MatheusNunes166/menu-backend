@@ -15,7 +15,7 @@ import { SpotService } from './spot.service';
 import { CreateSpotDTO } from './dto/create-spot';
 import { UpdateSpotDTO } from './dto/update-spot';
 
-@Controller('categories')
+@Controller('spots')
 export class SpotController {
   constructor(private readonly service: SpotService) {}
 

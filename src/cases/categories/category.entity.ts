@@ -7,6 +7,10 @@ export class Category {
 
   @Column({ length: 60, nullable: false })
   name: string;
+  @Column({ length: 60, default: '' })
+  icon: string;
+  @Column({ type: 'int', default: 0 })
+  displayOrder: number;
   @Column({ type: 'boolean', default: true })
   active: boolean;
 }
