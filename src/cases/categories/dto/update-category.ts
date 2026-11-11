@@ -4,6 +4,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  IsUrl,
   MaxLength,
   Min,
 } from 'class-validator';
@@ -16,8 +17,7 @@ export class UpdateCategoryDTO {
   name: string;
 
   @IsOptional()
-  @IsString()
-  @MaxLength(60)
+  @IsUrl()
   icon?: string;
 
   @IsOptional()

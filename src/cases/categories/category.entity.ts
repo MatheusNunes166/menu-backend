@@ -7,7 +7,7 @@ export class Category {
 
   @Column({ length: 60, nullable: false })
   name: string;
-  @Column({ length: 60, default: '' })
+  @Column({ type: 'text', nullable: true })
   icon: string;
   @Column({ type: 'int', default: 0 })
   displayOrder: number;
