@@ -1,5 +1,6 @@
 import {
   IsBoolean,
+  IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
@@ -12,6 +13,7 @@ import {
 export class UpdateProductDTO {
   @IsOptional()
   @IsString()
+  @IsNotEmpty()
   @MaxLength(60)
   name?: string;
 
@@ -23,6 +25,7 @@ export class UpdateProductDTO {
   @IsNumber({ maxDecimalPlaces: 2 })
   @Min(0)
   price?: number;
+
   @IsOptional()
   @IsUUID()
   categoryId?: string;
@@ -30,6 +33,14 @@ export class UpdateProductDTO {
   @IsOptional()
   @IsBoolean()
   active?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  isVegetarian?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  isNew?: boolean;
 
   @IsOptional()
   @IsUrl({ require_protocol: true })

@@ -14,8 +14,15 @@ export class Product {
 
   @Column({ length: 60, nullable: false })
   name: string;
+
   @Column({ type: 'boolean', default: true })
   active: boolean;
+
+  @Column({ type: 'boolean', default: false })
+  isVegetarian: boolean;
+
+  @Column({ type: 'boolean', default: false })
+  isNew: boolean;
 
   @Column({ type: 'text', nullable: true })
   description: string;

@@ -29,6 +29,7 @@ export class ProductService {
   async findOne(id: string): Promise<Product> {
     const product = await this.productRepository.findOne({
       where: { id },
+      relations: { category: true },
     });
     if (!product) {
       throw new NotFoundException('Produto não encontrado!');
@@ -47,6 +48,8 @@ export class ProductService {
       price: dto.price,
       picture: dto.picture,
       active: true,
+      isVegetarian: dto.isVegetarian ?? false,
+      isNew: dto.isNew ?? false,
       category,
     });
     return this.productRepository.save(product);
@@ -70,6 +73,14 @@ export class ProductService {
     if (dto.active !== undefined) {
       product.active = dto.active;
     }
+    if (dto.isVegetarian !== undefined) {
+      product.isVegetarian = dto.isVegetarian;
+    }
+
+    if (dto.isNew !== undefined) {
+      product.isNew = dto.isNew;
+    }
+
     if (dto.categoryId !== undefined) {
       product.category = dto.categoryId
         ? await this.getActiveCategory(dto.categoryId)

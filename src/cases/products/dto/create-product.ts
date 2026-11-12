@@ -14,7 +14,7 @@ export class CreateProductDTO {
   @IsString()
   @IsNotEmpty()
   @MaxLength(60)
-  name?: string;
+  name: string;
 
   @IsOptional()
   @IsString()
@@ -22,7 +22,7 @@ export class CreateProductDTO {
 
   @IsNumber({ maxDecimalPlaces: 2 })
   @Min(0)
-  price?: number;
+  price: number;
 
   @IsOptional()
   @IsUUID()
@@ -31,6 +31,14 @@ export class CreateProductDTO {
   @IsOptional()
   @IsBoolean()
   active?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  isVegetarian?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  isNew?: boolean;
 
   @IsOptional()
   @IsUrl({ require_protocol: true })
