@@ -44,5 +44,5 @@ export class UpdateProductDTO {
 
   @IsOptional()
   @IsUrl({ require_protocol: true })
-  picture?: string;
+  picture?: string | null;
 }

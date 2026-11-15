@@ -23,6 +23,19 @@ export class GuestCheckService {
     @InjectRepository(Spot)
     private readonly spotRepository: Repository<Spot>,
   ) {}
+  findOpened(): Promise<GuestCheck[]> {
+    return this.guestCheckRepository.find({
+      where: {
+        status: GuestCheckStatus.OPENED,
+      },
+      relations: {
+        spot: true,
+      },
+      order: {
+        createdAt: 'ASC',
+      },
+    });
+  }
 
   async create(dto: CreateGuestCheckDto): Promise<GuestCheck> {
     const spot = await this.spotRepository.findOneBy({

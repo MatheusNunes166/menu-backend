@@ -31,7 +31,7 @@ export class Product {
   price: number;
 
   @Column({ type: 'text', nullable: true })
-  picture: string;
+  picture: string | null;
 
   @ManyToOne(() => Category, { nullable: true })
   @JoinColumn({ name: 'category_id' })

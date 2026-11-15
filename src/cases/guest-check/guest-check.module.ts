@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { GuestCheck } from './guest-check.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { GuestCheck } from './guest-check.entity';
 import { GuestCheckController } from './guest-check.controller';
 import { GuestCheckService } from './guest-check.service';
 import { Spot } from '../spots/spot.entity';
