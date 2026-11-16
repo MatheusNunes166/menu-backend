@@ -15,6 +15,11 @@ import { CreateGuestCheckDto } from './dto/create-guest-check';
 export class GuestCheckController {
   constructor(private readonly service: GuestCheckService) {}
 
+  @Get()
+  findOpened(): Promise<GuestCheck[]> {
+    return this.service.findOpened();
+  }
+
   @Get(':id')
   findOne(
     @Param('id', ParseUUIDPipe)
