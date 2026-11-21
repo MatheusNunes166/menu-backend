@@ -104,18 +104,12 @@ export class OrderService {
   }
 
   async updateStatus(id: string, dto: UpdateOrderStatusDto): Promise<Order> {
-    const order = await this.findOne(id);
-
-    const nextStatus: Record<OrderStatus, OrderStatus | undefined> = {
-      [OrderStatus.NEW]: OrderStatus.PREPARING,
-      [OrderStatus.PREPARING]: OrderStatus.READY,
-      [OrderStatus.READY]: OrderStatus.DELIVERY,
-      [OrderStatus.DELIVERY]: undefined,
-    };
-
-    if (nextStatus[order.status] !== dto.status) {
+    if (!Object.values(OrderStatus).includes(dto.status)) {
       throw new BadRequestException('Status inválido!');
     }
+
+    const order = await this.findOne(id);
+
     order.status = dto.status;
 
     return this.orderRepository.save(order);
